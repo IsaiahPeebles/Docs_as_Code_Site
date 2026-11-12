@@ -1,0 +1,63 @@
+{
+  "numFound": 29,
+  "start": 0,
+  "numFoundExact": true,
+  "docs": [
+    {
+      "key": "OL14431239A",
+      "name": "F. Tolkien",
+      "top_work": "Thug Life",
+      "type": "author",
+      "work_count": 21,
+      "ratings_average": 0.0,
+      "ratings_sortable": 2.047372,
+      "ratings_count": 0,
+      "ratings_count_1": 0,
+      "ratings_count_2": 0,
+      "ratings_count_3": 0,
+      "ratings_count_4": 0,
+      "ratings_count_5": 0,
+      "want_to_read_count": 0,
+      "already_read_count": 0,
+      "currently_reading_count": 0,
+      "stopped_reading_count": 0,
+      "readinglog_count": 0,
+      "_root_": "/authors/OL14431239A",
+      "_version_": 1867236038911459329
+    },
+    {
+      "alternate_names": [
+        "Dzhon R. R. Tolkin",
+        "J. R. R. Tolkien",
+        "J. R. R. Tolkiën"
+      ],
+      "birth_date": "3 January 1892",
+      "death_date": "2 September 1973",
+      "key": "OL26320A",
+      "name": "J.R.R. Tolkien",
+      "top_subjects": [
+        "Middle Earth (Imaginary place)",
+        "Middle earth (imaginary place), fiction",
+        "British and irish fiction (fictional works by one author)"
+      ],
+      "top_work": "The Hobbit",
+      "type": "author",
+      "work_count": 346,
+      "ratings_average": 4.2897363,
+      "ratings_sortable": 4.2481203,
+      "ratings_count": 1705,
+      "ratings_count_1": 35,
+      "ratings_count_2": 59,
+      "ratings_count_3": 198,
+      "ratings_count_4": 498,
+      "ratings_count_5": 915,
+      "want_to_read_count": 12702,
+      "already_read_count": 2897,
+      "currently_reading_count": 895,
+      "stopped_reading_count": 1,
+      "readinglog_count": 16495,
+      "_root_": "/authors/OL26320A",
+      "_version_": 1870935680837746688
+    }
+  ]
+}

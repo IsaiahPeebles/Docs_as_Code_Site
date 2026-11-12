@@ -1,0 +1,92 @@
+{
+  "description": {
+    "type": "/type/text",
+    "value": "Originally published from 1954 through 1956, J.R.R. Tolkien's richly complex series ushered in a new age of epic adventure storytelling. A philologist and illustrator who took inspiration from his wor..."
+  },
+  "links": [
+    {
+      "title": "Tolkien Estate | The Lord of the Rings",
+      "url": "http://www.tolkienestate.com/en/writing/tales-of-middle-earth/the-lord-of-the-rings.html",
+      "type": {
+        "key": "/type/link"
+      }
+    },
+    {
+      "title": "The Lord of the Rings - Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/The_Lord_of_the_Rings",
+      "type": {
+        "key": "/type/link"
+      }
+    },
+    {
+      "title": "fantasybookreview.co.uk/JRR-Tolkien/The-Lord-Of-The-Rings",
+      "url": "http://www.fantasybookreview.co.uk/JRR-Tolkien/The-Lord-Of-The-Rings.html",
+      "type": {
+        "key": "/type/link"
+      }
+    }
+  ],
+  "title": "The Lord of the Rings",
+  "covers": [
+    14625765,
+    11658206,
+    13120659
+  ],
+  "subject_places": [
+    "Mordor",
+    "Hornburg",
+    "Isengard"
+  ],
+  "first_publish_date": "September 3, 2001",
+  "subject_people": [
+    "Frodo Baggins",
+    "Samwise Gamgee",
+    "Meriadoc Brandybuck"
+  ],
+  "key": "/works/OL27448W",
+  "authors": [
+    {
+      "author": {
+        "key": "/authors/OL26320A"
+      },
+      "type": {
+        "key": "/type/author_role"
+      }
+    }
+  ],
+  "subjects": [
+    "The Lord of the Rings",
+    "Fiction",
+    "Ficción"
+  ],
+  "type": {
+    "key": "/type/work"
+  },
+  "subject_times": [
+    "The end of the third age"
+  ],
+  "cover_edition": {
+    "key": "/books/OL3404981M"
+  },
+  "series": [
+    {
+      "series": {
+        "key": "/series/OL330052L"
+      },
+      "position": "1-3"
+    }
+  ],
+  "genres": [
+    "/tags/OL169T"
+  ],
+  "latest_revision": 131,
+  "revision": 131,
+  "created": {
+    "type": "/type/datetime",
+    "value": "2009-10-13T02:46:28.838662"
+  },
+  "last_modified": {
+    "type": "/type/datetime",
+    "value": "2026-09-09T17:04:36.298080"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "numFound": 48279,
+  "start": 3,
+  "numFoundExact": true,
+  "num_found": 48279,
+  "documentation_url": "https://openlibrary.org/dev/docs/api/search",
+  "q": "dune",
+  "offset": null,
+  "docs": [
+    {
+      "key": "/works/OL893515W",
+      "title": "God Emperor of Dune"
+    },
+    {
+      "key": "/works/OL893502W",
+      "title": "Heretics of Dune"
+    },
+    {
+      "key": "/works/OL893508W",
+      "title": "Chapterhouse Dune"
+    }
+  ]
+}

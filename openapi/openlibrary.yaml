@@ -1,0 +1,586 @@
+openapi: 3.1.0
+info:
+  title: Open Library API (unofficial description)
+  version: 0.3.0
+  license:
+    name: CC BY 4.0
+    identifier: CC-BY-4.0
+  summary: Hand-written description of the public read endpoints used in the guides.
+  description: |
+    Unofficial. Not affiliated with or endorsed by Open Library or the Internet Archive.
+
+    Written by hand from real responses observed on 2026-11-11. It covers only the
+    endpoints used in this site's guides, and only the fields those guides rely on.
+    Responses contain more fields than listed here.
+  contact:
+    name: Isaiah Peebles
+servers:
+  - url: https://openlibrary.org
+    description: Open Library
+tags:
+  - name: Search
+    description: Find works and authors, and browse by subject.
+  - name: Works
+    description: Works and their editions.
+  - name: Editions
+    description: Single published versions of a work.
+  - name: Authors
+    description: Authors and their works.
+  - name: Covers
+    description: Cover images and author photos, served from covers.openlibrary.org.
+
+paths:
+  /search.json:
+    get:
+      operationId: searchBooks
+      summary: Search for works
+      description: >-
+        Returns works that match the query. A request with no query parameters
+        returns 200 with no results.
+      tags: [Search]
+      parameters:
+        - name: q
+          in: query
+          description: Free-text query. Matches titles, authors, and subjects.
+          schema: {type: string}
+          example: the lord of the rings
+        - name: title
+          in: query
+          description: Match the title only.
+          schema: {type: string}
+          example: the hobbit
+        - name: author
+          in: query
+          description: Match the author name only.
+          schema: {type: string}
+          example: tolkien
+        - name: fields
+          in: query
+          description: Comma-separated list of fields to return for each result.
+          schema: {type: string}
+          example: key,title,author_name,first_publish_year
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: page
+          in: query
+          description: 1-based page number, in steps of `limit`. Alternative to `offset`.
+          schema: {type: integer, minimum: 1}
+          example: 2
+      responses:
+        '200':
+          description: Search results.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/SearchResponse'}
+
+  /search/authors.json:
+    get:
+      operationId: searchAuthors
+      summary: Search for authors
+      description: Returns authors whose names match `q`. Keys in the results have no `/authors/` prefix.
+      tags: [Search]
+      parameters:
+        - name: q
+          in: query
+          description: Author name to search for.
+          schema: {type: string}
+          example: tolkien
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: Matching authors.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/AuthorSearchResponse'}
+
+  /subjects/{subject}.json:
+    get:
+      operationId: getSubject
+      summary: List works on a subject
+      description: Returns the works tagged with a subject. Results are in `works`, not `docs`.
+      tags: [Search]
+      parameters:
+        - name: subject
+          in: path
+          required: true
+          description: Subject in lowercase, with underscores for spaces.
+          schema: {type: string}
+          example: science_fiction
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: The subject and a batch of its works.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/SubjectResponse'}
+
+  /works/{workId}.json:
+    get:
+      operationId: getWork
+      summary: Get a work
+      description: Returns one work. Author links are keys in `authors[].author.key`.
+      tags: [Works]
+      parameters:
+        - $ref: '#/components/parameters/workId'
+      responses:
+        '200':
+          description: The work.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Work'}
+        '404':
+          $ref: '#/components/responses/NotFoundJson'
+
+  /works/{workId}/editions.json:
+    get:
+      operationId: listWorkEditions
+      summary: List the editions of a work
+      description: Returns editions in batches. Follow `links.next` for the next batch.
+      tags: [Works]
+      parameters:
+        - $ref: '#/components/parameters/workId'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: A batch of editions.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/EditionList'}
+
+  /books/{editionId}.json:
+    get:
+      operationId: getEdition
+      summary: Get an edition
+      description: Returns one edition. The edition links to its work in `works[].key`.
+      tags: [Editions]
+      parameters:
+        - name: editionId
+          in: path
+          required: true
+          description: Edition ID, ending in `M`.
+          schema: {type: string, pattern: '^OL\d+M$'}
+          example: OL33912545M
+      responses:
+        '200':
+          description: The edition.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Edition'}
+
+  /isbn/{isbn}.json:
+    get:
+      operationId: getEditionByIsbn
+      summary: Look up an edition by ISBN
+      description: Redirects to the edition's `/books/{editionId}.json` URL.
+      tags: [Editions]
+      parameters:
+        - name: isbn
+          in: path
+          required: true
+          description: ISBN-10 or ISBN-13, digits only.
+          schema: {type: string}
+          example: '9780261103252'
+      responses:
+        '302':
+          description: Redirect to the edition.
+          headers:
+            Location:
+              description: URL of the edition, such as `https://openlibrary.org/books/OL33912545M.json`.
+              schema: {type: string, format: uri}
+        '404':
+          description: No edition has this ISBN. The body is an HTML page, not JSON.
+          content:
+            text/html:
+              schema: {type: string}
+
+  /authors/{authorId}.json:
+    get:
+      operationId: getAuthor
+      summary: Get an author
+      description: Returns one author. `bio` can be a string or a typed text object.
+      tags: [Authors]
+      parameters:
+        - $ref: '#/components/parameters/authorId'
+      responses:
+        '200':
+          description: The author.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Author'}
+
+  /authors/{authorId}/works.json:
+    get:
+      operationId: listAuthorWorks
+      summary: List an author's works
+      description: Returns works in batches. Follow `links.next` for the next batch.
+      tags: [Authors]
+      parameters:
+        - $ref: '#/components/parameters/authorId'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: A batch of works.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/WorkList'}
+
+  /b/{idType}/{value}-{size}.jpg:
+    servers:
+      - url: https://covers.openlibrary.org
+        description: Open Library covers
+    get:
+      operationId: getBookCover
+      summary: Get a book cover image
+      description: >-
+        `id` URLs return the image directly. `isbn` and `olid` URLs were observed
+        to redirect to archive.org.
+      tags: [Covers]
+      parameters:
+        - name: idType
+          in: path
+          required: true
+          description: What `value` is.
+          schema: {type: string, enum: [id, isbn, olid]}
+          example: id
+        - name: value
+          in: path
+          required: true
+          description: A cover ID, an ISBN, or an edition ID such as `OL33912545M`.
+          schema: {type: string}
+          example: '14627509'
+        - $ref: '#/components/parameters/coverSize'
+        - $ref: '#/components/parameters/coverDefault'
+      responses:
+        '200':
+          $ref: '#/components/responses/Image'
+        '302':
+          $ref: '#/components/responses/ImageRedirect'
+        '404':
+          description: No cover. Returned only with `default=false`. The body is empty.
+
+  /a/{idType}/{value}-{size}.jpg:
+    servers:
+      - url: https://covers.openlibrary.org
+        description: Open Library covers
+    get:
+      operationId: getAuthorPhoto
+      summary: Get an author photo
+      description: Returns an author photo by photo ID or author ID.
+      tags: [Covers]
+      parameters:
+        - name: idType
+          in: path
+          required: true
+          description: What `value` is.
+          schema: {type: string, enum: [id, olid]}
+          example: olid
+        - name: value
+          in: path
+          required: true
+          description: A photo ID from the author's `photos`, or an author ID such as `OL26320A`.
+          schema: {type: string}
+          example: OL26320A
+        - $ref: '#/components/parameters/coverSize'
+        - $ref: '#/components/parameters/coverDefault'
+      responses:
+        '200':
+          $ref: '#/components/responses/Image'
+        '404':
+          description: No photo. Returned only with `default=false`. The body is empty.
+
+components:
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results in this batch.
+      schema: {type: integer, minimum: 1}
+      example: 10
+    offset:
+      name: offset
+      in: query
+      description: 0-based index of the first result.
+      schema: {type: integer, minimum: 0}
+      example: 0
+    workId:
+      name: workId
+      in: path
+      required: true
+      description: Work ID, ending in `W`.
+      schema: {type: string, pattern: '^OL\d+W$'}
+      example: OL27448W
+    authorId:
+      name: authorId
+      in: path
+      required: true
+      description: Author ID, ending in `A`.
+      schema: {type: string, pattern: '^OL\d+A$'}
+      example: OL26320A
+    coverSize:
+      name: size
+      in: path
+      required: true
+      description: '`S` small, `M` medium, or `L` large.'
+      schema: {type: string, enum: [S, M, L]}
+      example: M
+    coverDefault:
+      name: default
+      in: query
+      description: Set to `false` to get 404 for a missing image instead of a 1x1 blank GIF.
+      schema: {type: string, enum: ['false']}
+
+  responses:
+    NotFoundJson:
+      description: >-
+        No record with this key. The body is JSON, but the response was observed
+        with no Content-Type header.
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/NotFound'}
+          example: {error: notfound, key: /works/OL0000000000W}
+    Image:
+      description: >-
+        The image. For a missing image without `default=false`, this is a
+        1x1 GIF with Content-Type `image/gif`.
+      content:
+        image/jpeg:
+          schema: {type: string, contentMediaType: image/jpeg}
+        image/gif:
+          schema: {type: string, contentMediaType: image/gif}
+    ImageRedirect:
+      description: Redirect to the image file on archive.org.
+      headers:
+        Location:
+          description: URL of the image file.
+          schema: {type: string, format: uri}
+
+  schemas:
+    KeyRef:
+      type: object
+      required: [key]
+      properties:
+        key: {type: string, examples: [/works/OL27448W]}
+    Text:
+      description: Either a plain string or a typed text object.
+      oneOf:
+        - type: string
+        - type: object
+          required: [value]
+          properties:
+            type: {type: string, examples: [/type/text]}
+            value: {type: string}
+    Datetime:
+      type: object
+      properties:
+        type: {type: string, examples: [/type/datetime]}
+        value: {type: string, examples: ['2026-09-09T17:03:04.654326']}
+    Link:
+      type: object
+      properties:
+        title: {type: string}
+        url: {type: string}
+        type: {$ref: '#/components/schemas/KeyRef'}
+    NotFound:
+      type: object
+      required: [error, key]
+      properties:
+        error: {type: string, examples: [notfound]}
+        key: {type: string}
+
+    SearchResponse:
+      type: object
+      required: [numFound, start, docs]
+      properties:
+        numFound: {type: integer, description: Total number of matches.}
+        num_found: {type: integer, description: Same value as `numFound`.}
+        numFoundExact: {type: boolean}
+        start: {type: integer, description: Index of the first result in this batch.}
+        q: {type: string, description: The `q` value sent. Empty when `q` was not used.}
+        offset:
+          type: [integer, 'null']
+          description: The `offset` value sent, or null.
+        documentation_url: {type: string}
+        docs:
+          type: array
+          items: {$ref: '#/components/schemas/SearchDoc'}
+    SearchDoc:
+      type: object
+      description: One work. Which fields appear depends on `fields`.
+      properties:
+        key: {type: string, examples: [/works/OL27482W]}
+        title: {type: string}
+        author_name: {type: array, items: {type: string}}
+        author_key:
+          type: array
+          description: Author IDs without the `/authors/` prefix.
+          items: {type: string, examples: [OL26320A]}
+        first_publish_year: {type: integer}
+        edition_count: {type: integer}
+        cover_i: {type: integer, description: Cover ID for the covers API.}
+        isbn: {type: array, items: {type: string}}
+
+    AuthorSearchResponse:
+      type: object
+      required: [numFound, start, docs]
+      properties:
+        numFound: {type: integer}
+        numFoundExact: {type: boolean}
+        start: {type: integer}
+        docs:
+          type: array
+          items: {$ref: '#/components/schemas/AuthorSearchDoc'}
+    AuthorSearchDoc:
+      type: object
+      required: [key, name]
+      properties:
+        key:
+          type: string
+          description: Author ID without the `/authors/` prefix.
+          examples: [OL26320A]
+        name: {type: string}
+        type: {type: string, examples: [author]}
+        top_work: {type: string}
+        work_count: {type: integer}
+        birth_date: {type: string}
+        death_date: {type: string}
+        alternate_names: {type: array, items: {type: string}}
+        top_subjects: {type: array, items: {type: string}}
+
+    SubjectResponse:
+      type: object
+      required: [key, name, work_count, works]
+      properties:
+        key: {type: string, examples: [/subjects/science_fiction]}
+        name: {type: string, examples: [science fiction]}
+        subject_type: {type: string, examples: [subject]}
+        work_count: {type: integer, description: Total number of works on this subject.}
+        works:
+          type: array
+          items: {$ref: '#/components/schemas/SubjectWork'}
+    SubjectWork:
+      type: object
+      required: [key, title]
+      properties:
+        key: {type: string, examples: [/works/OL138052W]}
+        title: {type: string}
+        edition_count: {type: integer}
+        cover_id: {type: integer, description: Cover ID for the covers API.}
+        first_publish_year: {type: integer}
+        has_fulltext: {type: boolean}
+        authors:
+          type: array
+          items:
+            type: object
+            required: [key, name]
+            properties:
+              key: {type: string, examples: [/authors/OL22098A]}
+              name: {type: string}
+
+    Work:
+      type: object
+      required: [key, title]
+      properties:
+        key: {type: string, examples: [/works/OL27448W]}
+        title: {type: string}
+        authors:
+          type: array
+          items:
+            type: object
+            properties:
+              author: {$ref: '#/components/schemas/KeyRef'}
+              type: {$ref: '#/components/schemas/KeyRef'}
+        description: {$ref: '#/components/schemas/Text'}
+        covers: {type: array, items: {type: integer}}
+        subjects: {type: array, items: {type: string}}
+        first_publish_date: {type: string}
+        links: {type: array, items: {$ref: '#/components/schemas/Link'}}
+        type: {$ref: '#/components/schemas/KeyRef'}
+        revision: {type: integer}
+        created: {$ref: '#/components/schemas/Datetime'}
+        last_modified: {$ref: '#/components/schemas/Datetime'}
+
+    Edition:
+      type: object
+      required: [key, title]
+      properties:
+        key: {type: string, examples: [/books/OL33912545M]}
+        title: {type: string}
+        works:
+          type: array
+          items: {$ref: '#/components/schemas/KeyRef'}
+        publishers: {type: array, items: {type: string}}
+        publish_date:
+          type: string
+          description: Free text. Formats vary, such as `2004` or `25/01/2023`.
+        isbn_10: {type: array, items: {type: string}}
+        isbn_13:
+          type: array
+          description: Some values contain hyphens.
+          items: {type: string}
+        number_of_pages: {type: integer}
+        physical_format: {type: string}
+        covers: {type: array, items: {type: integer}}
+        languages:
+          type: array
+          items: {$ref: '#/components/schemas/KeyRef'}
+        type: {$ref: '#/components/schemas/KeyRef'}
+        revision: {type: integer}
+        created: {$ref: '#/components/schemas/Datetime'}
+        last_modified: {$ref: '#/components/schemas/Datetime'}
+
+    Author:
+      type: object
+      required: [key, name]
+      properties:
+        key: {type: string, examples: [/authors/OL26320A]}
+        name: {type: string}
+        personal_name: {type: string}
+        fuller_name: {type: string}
+        birth_date: {type: string}
+        death_date: {type: string}
+        bio: {$ref: '#/components/schemas/Text'}
+        alternate_names: {type: array, items: {type: string}}
+        photos:
+          type: array
+          description: Photo IDs for the covers API (`/a/id/{value}-{size}.jpg`).
+          items: {type: integer}
+        links: {type: array, items: {$ref: '#/components/schemas/Link'}}
+        remote_ids:
+          type: object
+          description: IDs in other catalogs, such as `wikidata` or `viaf`.
+          additionalProperties: {type: string}
+        type: {$ref: '#/components/schemas/KeyRef'}
+        revision: {type: integer}
+        created: {$ref: '#/components/schemas/Datetime'}
+        last_modified: {$ref: '#/components/schemas/Datetime'}
+
+    EditionList:
+      type: object
+      required: [links, size, entries]
+      properties:
+        links:
+          type: object
+          properties:
+            self: {type: string}
+            work: {type: string}
+            next: {type: string, description: Path of the next batch.}
+        size: {type: integer, description: Total number of editions.}
+        entries:
+          type: array
+          items: {$ref: '#/components/schemas/Edition'}
+    WorkList:
+      type: object
+      required: [links, size, entries]
+      properties:
+        links:
+          type: object
+          properties:
+            self: {type: string}
+            author: {type: string}
+            next: {type: string, description: Path of the next batch.}
+        size: {type: integer, description: Total number of works.}
+        entries:
+          type: array
+          items: {$ref: '#/components/schemas/Work'}

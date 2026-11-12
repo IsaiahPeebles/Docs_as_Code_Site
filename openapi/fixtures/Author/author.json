@@ -1,0 +1,73 @@
+{
+  "alternate_names": [
+    "Dzhon R. R. Tolkin",
+    "J. R. R. Tolkien",
+    "J. R. R. Tolkiën"
+  ],
+  "personal_name": "J. R. R. Tolkien",
+  "type": {
+    "key": "/type/author"
+  },
+  "death_date": "2 September 1973",
+  "photos": [
+    6155606,
+    6433524,
+    6433525
+  ],
+  "links": [
+    {
+      "title": "The Tolkien Society",
+      "url": "http://www.tolkiensociety.org/index.html",
+      "type": {
+        "key": "/type/link"
+      }
+    },
+    {
+      "title": "The Official Website of the JRR Tolkien Estate",
+      "url": "http://www.tolkienestate.com/",
+      "type": {
+        "key": "/type/link"
+      }
+    },
+    {
+      "title": "TheOneRing.com",
+      "url": "http://www.theonering.com/",
+      "type": {
+        "key": "/type/link"
+      }
+    }
+  ],
+  "name": "J.R.R. Tolkien",
+  "key": "/authors/OL26320A",
+  "entity_type": "person",
+  "bio": "John Ronald Reuel Tolkien (1892-1973) was a major scholar of the English language, specialising in Old and Middle English. Twice Professor of Anglo-Saxon (Old English) at the University of Oxford, he ...",
+  "title": "(John Ronald Reuel)",
+  "remote_ids": {
+    "viaf": "95218067",
+    "storygraph": "ab1242c9-8f9b-475c-845f-ea406db30ebc",
+    "amazon": "B000ARC6KA",
+    "wikidata": "Q892",
+    "isni": "0000000121441970",
+    "goodreads": "656983",
+    "project_gutenberg": "42379",
+    "musicbrainz": "97f3efea-558f-4137-9e4c-8a2fcec3c2d4",
+    "bookbrainz": "4e8f8704-7c34-4a00-8ce5-f02bf26ca7df",
+    "imdb": "nm0866058",
+    "lc_naf": "n79005673",
+    "librarything": "tolkienjrr",
+    "librivox": "1536",
+    "opac_sbn": "CFIV015811"
+  },
+  "fuller_name": "John Ronald Reuel Tolkien",
+  "birth_date": "3 January 1892",
+  "latest_revision": 63,
+  "revision": 63,
+  "created": {
+    "type": "/type/datetime",
+    "value": "2008-04-01T03:28:50.625462"
+  },
+  "last_modified": {
+    "type": "/type/datetime",
+    "value": "2026-07-15T21:04:07.836456"
+  }
+}

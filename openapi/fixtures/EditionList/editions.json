@@ -1,0 +1,111 @@
+{
+  "links": {
+    "self": "/works/OL27448W/editions.json?limit=2",
+    "work": "/works/OL27448W",
+    "next": "/works/OL27448W/editions.json?limit=2&offset=2"
+  },
+  "size": 253,
+  "entries": [
+    {
+      "works": [
+        {
+          "key": "/works/OL27448W"
+        }
+      ],
+      "title": "El seños de los anillos 2, las dos torres",
+      "publishers": [
+        "Booket"
+      ],
+      "publish_date": "1966",
+      "key": "/books/OL62536872M",
+      "type": {
+        "key": "/type/edition"
+      },
+      "covers": [
+        15252991
+      ],
+      "isbn_13": [
+        "9788445077504"
+      ],
+      "series": [
+        "El senor de los anillos, 2"
+      ],
+      "languages": [
+        {
+          "key": "/languages/spa"
+        }
+      ],
+      "latest_revision": 3,
+      "revision": 3,
+      "created": {
+        "type": "/type/datetime",
+        "value": "2026-09-09T17:03:04.654326"
+      },
+      "last_modified": {
+        "type": "/type/datetime",
+        "value": "2026-09-09T17:04:36.298080"
+      }
+    },
+    {
+      "works": [
+        {
+          "key": "/works/OL27448W"
+        }
+      ],
+      "title": "Il Signore degli Anelli",
+      "publishers": [
+        "Bompiani"
+      ],
+      "publish_date": "25/01/2023",
+      "key": "/books/OL62445425M",
+      "type": {
+        "key": "/type/edition"
+      },
+      "covers": [
+        15246502
+      ],
+      "isbn_13": [
+        "978-8830119000"
+      ],
+      "isbn_10": [
+        "8830119008"
+      ],
+      "weight": "1.1 kilos",
+      "publish_places": [
+        "Italy"
+      ],
+      "contributors": [
+        {
+          "role": "Translator",
+          "name": "Ottavio Fatica"
+        }
+      ],
+      "languages": [
+        {
+          "key": "/languages/ita"
+        }
+      ],
+      "translation_of": "The Lord of the Rings",
+      "translated_from": [
+        {
+          "key": "/languages/eng"
+        }
+      ],
+      "description": {
+        "type": "/type/text",
+        "value": "In un unico volume La compagnia dell'anello, Le due torri, Il ritorno del re. Il Signore degli Anelli è un romanzo d’eccezione, al di fuori del tempo: chiarissimo ed enigmatico, semplice e sublime. Do..."
+      },
+      "physical_format": "Paperback",
+      "latest_revision": 3,
+      "revision": 3,
+      "created": {
+        "type": "/type/datetime",
+        "value": "2026-08-17T18:36:09.800957"
+      },
+      "last_modified": {
+        "type": "/type/datetime",
+        "value": "2026-08-17T18:39:53.961921"
+      }
+    }
+  ]
+}

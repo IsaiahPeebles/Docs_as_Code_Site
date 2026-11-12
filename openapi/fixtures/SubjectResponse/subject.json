@@ -1,0 +1,111 @@
+{
+  "key": "/subjects/fantasy",
+  "name": "fantasy",
+  "subject_type": "subject",
+  "solr_query": "subject_key:\"fantasy\"",
+  "work_count": 14930,
+  "works": [
+    {
+      "key": "/works/OL138052W",
+      "title": "Alice's Adventures in Wonderland",
+      "edition_count": 3548,
+      "cover_id": 10527843,
+      "cover_edition_key": "OL31754751M",
+      "subject": [
+        "Alice (fictitious character : carroll), fiction",
+        "British and irish fiction (fictional works by one author)",
+        "Fiction, fantasy, general"
+      ],
+      "ia_collection": [
+        "Boston_College_Library",
+        "americana",
+        "audio_bookspoetry"
+      ],
+      "printdisabled": true,
+      "lending_edition": "OL45637056M",
+      "lending_identifier": "alicesadventures0000unse_v7d2",
+      "authors": [
+        {
+          "key": "/authors/OL22098A",
+          "name": "Lewis Carroll"
+        }
+      ],
+      "first_publish_year": 1865,
+      "ia": "alicesadventures0000unse_v7d2",
+      "public_scan": true,
+      "has_fulltext": true,
+      "availability": {
+        "status": "open",
+        "available_to_browse": false,
+        "available_to_borrow": false,
+        "available_to_waitlist": false,
+        "is_printdisabled": false,
+        "is_readable": true,
+        "is_lendable": false,
+        "is_previewable": true,
+        "identifier": "alicesadventures0000unse_v7d2",
+        "isbn": null,
+        "oclc": null,
+        "openlibrary_work": "OL138052W",
+        "openlibrary_edition": "OL45637056M",
+        "last_loan_date": null,
+        "num_waitlist": null,
+        "last_waitlist_date": null,
+        "is_restricted": false,
+        "is_browseable": false,
+        "__src__": "core.models.lending.get_availability"
+      }
+    },
+    {
+      "key": "/works/OL18417W",
+      "title": "The Wonderful Wizard of Oz",
+      "edition_count": 2049,
+      "cover_id": 552443,
+      "cover_edition_key": "OL8155451M",
+      "subject": [
+        "Witches",
+        "Spanish language materials",
+        "Fiction"
+      ],
+      "ia_collection": [
+        "americana",
+        "americanuniversity-ol",
+        "bannedbooks"
+      ],
+      "printdisabled": true,
+      "lending_edition": "OL7241696M",
+      "lending_identifier": "newwizardofoz00baum",
+      "authors": [
+        {
+          "key": "/authors/OL23431A",
+          "name": "L. Frank Baum"
+        }
+      ],
+      "first_publish_year": 1899,
+      "ia": "newwizardofoz00baum",
+      "public_scan": true,
+      "has_fulltext": true,
+      "availability": {
+        "status": "open",
+        "available_to_browse": false,
+        "available_to_borrow": false,
+        "available_to_waitlist": false,
+        "is_printdisabled": false,
+        "is_readable": true,
+        "is_lendable": false,
+        "is_previewable": true,
+        "identifier": "newwizardofoz00baum",
+        "isbn": null,
+        "oclc": null,
+        "openlibrary_work": "OL18417W",
+        "openlibrary_edition": "OL7241696M",
+        "last_loan_date": null,
+        "num_waitlist": null,
+        "last_waitlist_date": null,
+        "is_restricted": false,
+        "is_browseable": false,
+        "__src__": "core.models.lending.get_availability"
+      }
+    }
+  ]
+}

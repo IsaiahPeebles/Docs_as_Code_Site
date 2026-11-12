@@ -1,0 +1,15 @@
+extends: capitalization
+message: "Use sentence case for headings: '%s'."
+level: error
+scope: heading
+match: $sentence
+exceptions:
+  - API
+  - ISBN
+  - OpenAPI
+  - Open Library
+  - Python
+  - Internet Archive
+  - JSON
+  - URL
+  - HTML

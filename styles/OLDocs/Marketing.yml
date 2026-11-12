@@ -1,0 +1,15 @@
+extends: existence
+message: "Avoid '%s'. Say what the thing does instead."
+level: error
+ignorecase: true
+tokens:
+  - simply
+  - easily
+  - effortless(?:ly)?
+  - seamless(?:ly)?
+  - powerful
+  - robust
+  - cutting-edge
+  - best-in-class
+  - leverage
+  - blazing(?:ly)?

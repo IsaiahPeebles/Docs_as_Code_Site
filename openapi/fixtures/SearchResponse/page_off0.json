@@ -1,0 +1,23 @@
+{
+  "numFound": 48279,
+  "start": 0,
+  "numFoundExact": true,
+  "num_found": 48279,
+  "documentation_url": "https://openlibrary.org/dev/docs/api/search",
+  "q": "dune",
+  "offset": 0,
+  "docs": [
+    {
+      "key": "/works/OL893414W",
+      "title": "Dune"
+    },
+    {
+      "key": "/works/OL893461W",
+      "title": "Dune Messiah"
+    },
+    {
+      "key": "/works/OL893516W",
+      "title": "Children of Dune"
+    }
+  ]
+}

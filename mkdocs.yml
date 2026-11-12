@@ -1,0 +1,57 @@
+site_name: Open Library API (Unofficial Docs)
+site_description: Unofficial community documentation for the Open Library API.
+site_author: Isaiah Peebles
+copyright: >-
+  Unofficial community documentation by Isaiah Peebles. Not affiliated with
+  or endorsed by Open Library or the Internet Archive.
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.sections
+    - content.code.copy
+
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
+  anchors: warn
+
+plugins:
+  - search
+  - neoteroi.mkdocsoad
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+
+nav:
+  - Home: index.md
+  - Get started:
+      - Quickstart: quickstart.md
+      - Works, editions, and authors: concepts.md
+  - Guides:
+      - Search for books: guides/search-books.md
+      - Get author details: guides/author-details.md
+      - Show cover images: guides/cover-images.md
+      - Page through results: guides/pagination.md
+      - Handle errors and rate limits: guides/errors.md
+  - Reference:
+      - API reference (OpenAPI): reference.md
+  - About this site:
+      - Information architecture: information-architecture.md
+      - Style guide: style-guide.md
+      - Changelog: changelog.md

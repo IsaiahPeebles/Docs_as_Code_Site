@@ -1,0 +1,6 @@
+mkdocs-material==9.8.1
+requests==2.34.2
+neoteroi-mkdocs==1.2.0
+vale==3.26.0.1
+linkchecker==10.6.0
+jsonschema==4.26.0

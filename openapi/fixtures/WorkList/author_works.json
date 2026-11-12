@@ -1,0 +1,64 @@
+{
+  "links": {
+    "self": "/authors/OL26320A/works.json?limit=2",
+    "author": "/authors/OL26320A",
+    "next": "/authors/OL26320A/works.json?limit=2&offset=2"
+  },
+  "size": 359,
+  "entries": [
+    {
+      "title": "Der Schmied von Großholzingen",
+      "authors": [
+        {
+          "author": {
+            "key": "/authors/OL26320A"
+          },
+          "type": {
+            "key": "/type/author_role"
+          }
+        }
+      ],
+      "key": "/works/OL46165393W",
+      "type": {
+        "key": "/type/work"
+      },
+      "latest_revision": 1,
+      "revision": 1,
+      "created": {
+        "type": "/type/datetime",
+        "value": "2026-11-04T09:03:57.008063"
+      },
+      "last_modified": {
+        "type": "/type/datetime",
+        "value": "2026-11-04T09:03:57.008063"
+      }
+    },
+    {
+      "authors": [
+        {
+          "author": {
+            "key": "/authors/OL26320A"
+          },
+          "type": {
+            "key": "/type/author_role"
+          }
+        }
+      ],
+      "key": "/works/OL46147739W",
+      "type": {
+        "key": "/type/work"
+      },
+      "title": "El Hobbit",
+      "latest_revision": 2,
+      "revision": 2,
+      "created": {
+        "type": "/type/datetime",
+        "value": "2026-11-01T14:15:44.007592"
+      },
+      "last_modified": {
+        "type": "/type/datetime",
+        "value": "2026-11-01T14:17:01.050523"
+      }
+    }
+  ]
+}

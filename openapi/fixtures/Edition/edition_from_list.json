@@ -1,0 +1,40 @@
+{
+  "works": [
+    {
+      "key": "/works/OL27448W"
+    }
+  ],
+  "title": "El seños de los anillos 2, las dos torres",
+  "publishers": [
+    "Booket"
+  ],
+  "publish_date": "1966",
+  "key": "/books/OL62536872M",
+  "type": {
+    "key": "/type/edition"
+  },
+  "covers": [
+    15252991
+  ],
+  "isbn_13": [
+    "9788445077504"
+  ],
+  "series": [
+    "El senor de los anillos, 2"
+  ],
+  "languages": [
+    {
+      "key": "/languages/spa"
+    }
+  ],
+  "latest_revision": 3,
+  "revision": 3,
+  "created": {
+    "type": "/type/datetime",
+    "value": "2026-09-09T17:03:04.654326"
+  },
+  "last_modified": {
+    "type": "/type/datetime",
+    "value": "2026-09-09T17:04:36.298080"
+  }
+}
